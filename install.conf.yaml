@@ -5,5 +5,13 @@
       force:  true
 
 - link:
-    ~/.config/fish/config.fish:
-    ~/.config/fish/fishfile:
+    ~/.config/fish/config.fish: fish/config.fish
+    ~/.config/fish/fishfile: fish/fishfile
+    ~/.config/fish/functions/:
+      path: fish/functions/*
+      glob: true
+    ~/.tmux.conf:
+    ~/.vimrc:
+    ~/.config/nvim/init.vim: nvim/init.vim
+
+
