@@ -1,8 +1,8 @@
 """ Optixal's Neovim Init.vim
 
 set shell=/bin/bash
-" Enable true color 启用终端24位色
-if exists('+termguicolors')
+" Enable true color
+if !has('nvim') && exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
@@ -22,6 +22,8 @@ set encoding=utf-8
 set number relativenumber
 set title
 set lazyredraw
+set mouse=a
+set wildmode=longest:full,full
 
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>

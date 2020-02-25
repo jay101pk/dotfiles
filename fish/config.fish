@@ -13,4 +13,10 @@ set -g theme_nerd_fonts yes
 set -g fish_prompt_pwd_dir_length 2
 set -g ENHANCD_DOT_ARG '...'
 
-source "$HOME/.homesick/repos/homeshick/homeshick.fish"
+abbr vi 'nvim'
+abbr vim 'nvim'
+abbr l 'ls -CF'
+abbr ll 'ls -alF'
+abbr la 'ls -A'
+
+source local.fish

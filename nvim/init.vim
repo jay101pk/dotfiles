@@ -1,10 +1,16 @@
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
 source ~/.vimrc
 
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+let plug_install = 0
+let autoload_plug_path = stdpath('config') . '/autoload/plug.vim'
+if !filereadable(autoload_plug_path)
+    silent exe '!curl -fL --create-dirs -o ' . autoload_plug_path . 
+        \ ' https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+    execute 'source ' . fnameescape(autoload_plug_path)
+    let plug_install = 1
 endif
+unlet autoload_plug_path
 
 """ Vim-Plug
 call plug#begin()
@@ -16,9 +22,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
-
-" Aethetics - Additional
-Plug 'rhysd/vim-color-spring-night'
+Plug 'chriskempson/base16-vim'
+Plug 'edkolev/tmuxline.vim'
 
 " Functionalities
 Plug 'tpope/vim-fugitive'
@@ -45,21 +50,22 @@ Plug 'metakirby5/codi.vim'
 
 call plug#end()
 
+if plug_install
+        PlugInstall --sync
+endif
+unlet plug_install
+
 """ Python3 VirtualEnv
 let g:python3_host_prog = expand('~/.config/nvim/env/bin/python')
 
-""" Coloring
-color spring-night
-
-" Opaque Background (Comment out to use terminal's profile)
 set termguicolors
+
+""" Coloring
+colorscheme base16-default-dark
 
 " Transparent Background (For i3 and compton)
 highlight Normal guibg=NONE ctermbg=NONE
 highlight LineNr guibg=NONE ctermbg=NONE
-
-""" Other Configurations
-filetype plugin indent on
 
 " after a re-source, fix syntax matching issues (concealing brackets):
 if exists('g:loaded_webdevicons')
@@ -79,7 +85,18 @@ let g:airline_powerline_fonts = 1
 "let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
 let g:airline_section_warning = ''
 let g:airline#extensions#tabline#enabled = 1
-let g:airlin_theme='seagull'
+
+" Tmuxline
+
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'b'    : '#W',
+      \'c'    : '#(uptime | cut -d " " -f 1,2,3)',
+      \'win'  : '#I #W',
+      \'cwin' : '#I #W #F',
+      \'x'    : '%a %m/%d',
+      \'y'    : '%I:%M:%S %p',
+      \'z'    : '#H'}
 
 " Neovim :Terminal
 tmap <Esc> <C-\><C-n>

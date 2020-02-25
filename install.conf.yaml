@@ -11,6 +11,7 @@
       path: fish/functions/*
       glob: true
     ~/.tmux.conf:
+    ~/.tmux.theme:
     ~/.vimrc:
     ~/.config/nvim/init.vim: nvim/init.vim
 
