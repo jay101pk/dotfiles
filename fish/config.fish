@@ -10,13 +10,15 @@ set -xg EDITOR nvim
 eval (python -m virtualfish)
 
 set -g theme_nerd_fonts yes
-set -g fish_prompt_pwd_dir_length 2
-set -g ENHANCD_DOT_ARG '...'
 
 abbr vi 'nvim'
 abbr vim 'nvim'
-abbr l 'ls -CF'
-abbr ll 'ls -alF'
-abbr la 'ls -A'
+abbr l 'ls'
 
-source local.fish
+if test -e $HOME/.config/fish/local.fish
+    source $HOME/.config/fish/local.fish
+end
+
+if test -f /usr/local/bin/starship
+    starship init fish | source
+end
