@@ -10,6 +10,8 @@ set -xg EDITOR nvim
 eval (python -m virtualfish)
 
 set -g theme_nerd_fonts yes
+set -g pure_color_success green
+set -g pure_color_mute brmagenta
 
 abbr vi 'nvim'
 abbr vim 'nvim'
@@ -19,6 +21,6 @@ if test -e $HOME/.config/fish/local.fish
     source $HOME/.config/fish/local.fish
 end
 
-if test -f /usr/local/bin/starship
-    starship init fish | source
-end
+#if test -f /usr/local/bin/starship
+    #starship init fish | source
+#end

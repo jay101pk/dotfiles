@@ -4,3 +4,5 @@ oh-my-fish/plugin-bang-bang
 oh-my-fish/plugin-thefuck
 oh-my-fish/plugin-cd
 jorgebucaran/fish-bax
+barnybug/docker-fish-completion
+rafaelrinaldi/pure
